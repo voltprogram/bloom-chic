@@ -483,13 +483,14 @@
 </footer>
 <script>
     document.querySelector("#form").addEventListener("submit", function(e) {
-      e.preventDefault(); // 送信キャンセル
-      const form = e.target;
-      const data = new FormData(form);
-      const query = new URLSearchParams(data).toString();
-      window.location.href = "confirm.html?" + query;
+      e.preventDefault();
+      const formData = new FormData(this);
+      for (const [key, value] of formData.entries()) {
+        sessionStorage.setItem(key, value);
+      }
+      location.href = "confirm.html";
     });
-</script>
+  </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 
