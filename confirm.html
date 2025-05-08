@@ -184,4 +184,35 @@
     <p class="footer-copyright">©️ 2024 BloomChic</p>
 </footer>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+	const data = JSON.parse(localStorage.getItem("formData"));
+	if (!data) {
+	window.location.href = "index.html"; // データがなければ戻す
+	return;
+	}
+
+	// 内容を画面に表示
+	document.getElementById("conf-name").textContent = data.name;
+	document.getElementById("conf-furigana").textContent = data.furigana;
+	document.getElementById("conf-mail").textContent = data.mail;
+	document.getElementById("conf-tel").textContent = data.tel;
+	document.getElementById("conf-comment").textContent = data.comment;
+
+	// フォームに値をセット（Formspree送信用）
+	const form = document.querySelector("form.confirm");
+	form.querySelector("input[name='name']").value = data.name;
+	form.querySelector("input[name='furigana']").value = data.furigana;
+	form.querySelector("input[name='mail']").value = data.mail;
+	form.querySelector("input[name='tel']").value = data.tel;
+	form.querySelector("input[name='comment']").value = data.comment;
+	form.querySelector("input[name='privacy']").value = data.privacy;
+
+	// 送信後にlocalStorageを削除（必要に応じて）
+	form.addEventListener("submit", function () {
+	localStorage.removeItem("formData");
+	});
+});
+</script>
+
 </body>
