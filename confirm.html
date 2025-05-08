@@ -108,10 +108,17 @@
     <div class="inner">
         <h2 class="section-title"><span>CONTACT</span>お問い合わせ</h2>
         <p class="section-txt">
-            お問い合わせはまだ完了していません。<br>
-            下記の入力内容をご確認し<br class="sp_only">送信ボタンを押してください。
+        お問い合わせはまだ完了していません。<br>
+        下記の入力内容をご確認し<br class="sp_only">送信ボタンを押してください。
         </p>
-        <div id="confirm-box"></div>
+        <div id="confirm-box">
+            <div class="confirm-item"><span class="confirm-label">お名前</span><span id="conf-name"></span></div>
+            <div class="confirm-item"><span class="confirm-label">ふりがな</span><span id="conf-furigana"></span></div>
+            <div class="confirm-item"><span class="confirm-label">メールアドレス</span><span id="conf-mail"></span></div>
+            <div class="confirm-item"><span class="confirm-label">電話番号</span><span id="conf-tel"></span></div>
+            <div class="confirm-item"><span class="confirm-label">お問い合わせ内容</span><span id="conf-comment"></span></div>
+        </div>
+
         <form class="confirm" method="POST" action="https://formspree.io/f/movdwlqp">
             <input type="hidden" name="_redirect" value="https://voltprogram.github.io/bloom-chic/thanks.html">
             <input type="hidden" name="name">
@@ -120,6 +127,7 @@
             <input type="hidden" name="tel">
             <input type="hidden" name="comment">
             <input type="hidden" name="privacy" value="同意する">
+
             <div class="confirm-button-content">
                 <button class="return" type="button" onclick="history.back()">戻る</button>
                 <button class="comp" type="submit">送信する</button>
@@ -127,7 +135,7 @@
         </form>
     </div>
 </section>
-<!-- /contact-confirm  -->
+<!-- /contact-confirm -->
 
 <footer class="footer">
     <div class="footer-top-content">
@@ -178,26 +186,14 @@
 </footer>
 
 <script>
-    const params = new URLSearchParams(location.search);
-    const confirmBox = document.querySelector("#confirm-box");
-    const form = document.forms[0];
-  
-    const labels = {
-      name: "お名前",
-      furigana: "ふりがな",
-      mail: "メールアドレス",
-      tel: "電話番号",
-      comment: "お問い合わせ内容"
-    };
-  
-    for (const key in labels) {
-      const value = params.get(key) || "";
-      const label = labels[key];
-      confirmBox.innerHTML += `<p><strong>${label}</strong> ${value.replace(/\n/g, "<br>")}</p>`;
-      if (form.elements[key]) {
-        form.elements[key].value = value;
-      }
-    }
-  </script>
+    // sessionStorage からデータを取得して表示と hidden input に反映
+    const fields = ['name', 'furigana', 'mail', 'tel', 'comment'];
+
+    fields.forEach(field => {
+      const value = sessionStorage.getItem(field) || '';
+      document.getElementById(`conf-${field}`).textContent = value;
+      document.querySelector(`input[name="${field}"]`).value = value;
+    });
+</script>
 
 </body>
