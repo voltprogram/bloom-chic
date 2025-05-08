@@ -43,8 +43,8 @@
             </a>
             <div class="header-menu">
                 <div class="header-link pc_only">
-                    <a class="header-contact" href="index.html/#contact">Contact</a>
-                    <a class="header-online" href="#">Online shop</a>
+                    <a class="header-contact" href="index.html#contact">Contact</a>
+                    <a class="header-online" href="index.html#online">Online shop</a>
                 </div>
                 <button class="toggle-menu">
                     <span class="toggle-line"></span>
@@ -62,25 +62,25 @@
                 <nav class="global_nav">
                     <ul>
                         <li>
-                            <a href="#">BloomChicについて</a>
+                            <a href="index.html#about">BloomChicについて</a>
                         </li>
                         <li>
-                            <a href="#">サービス</a>
+                            <a href="index.html#service">サービス</a>
                         </li>
                         <li>
-                            <a href="#">よくある質問</a>
+                            <a href="index.html#faq">よくある質問</a>
                         </li>
                         <li>
                             <a href="#">お知らせ</a>
                         </li>
                         <li>
-                            <a href="#">お取り扱い商品</a>
+                            <a href="index.html#items">お取り扱い商品</a>
                         </li>
                     </ul>
                 </nav>
                 <div class="header-content-link1">
-                    <a href="#" class="mail-btn">Contact</a>
-                    <a href="#" class="cart-btn">Online shop</a>
+                    <a href="index.html#contact" class="mail-btn">Contact</a>
+                    <a href="index.html#online" class="cart-btn">Online shop</a>
                 </div>
                 <div class="header-content-link2">
                     <div class="header-content-sns">
@@ -120,7 +120,7 @@
         </div>
 
         <form class="confirm" method="POST" action="https://formspree.io/f/movdwlqp">
-            <input type="hidden" name="_redirect" value="https://voltprogram.github.io/bloom-chic/thanks.html">
+            <input type="hidden" name="_redirect" value="https://voltprogram.github.io/thanks.html">
             <input type="hidden" name="name">
             <input type="hidden" name="furigana">
             <input type="hidden" name="mail">
@@ -145,19 +145,19 @@
         <nav class="footer-nav">
             <ul class="footer-list">
                 <li class="footer-item">
-                    <a href="#"> BloomChicについて</a>
+                    <a href="index.html#about"> BloomChicについて</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">サービス</a>
+                    <a href="index.html#service">サービス</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">よくある質問</a>
+                    <a href="index.html#faq">よくある質問</a>
                 </li>
                 <li class="footer-item">
                     <a href="#">お知らせ</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">お取り扱い商品</a>
+                    <a href="index.html#items">お取り扱い商品</a>
                 </li>
             </ul>
         </nav>
@@ -186,13 +186,33 @@
 </footer>
 
 <script>
-    // sessionStorage からデータを取得して表示と hidden input に反映
-    const fields = ['name', 'furigana', 'mail', 'tel', 'comment'];
-
-    fields.forEach(field => {
-      const value = sessionStorage.getItem(field) || '';
-      document.getElementById(`conf-${field}`).textContent = value;
-      document.querySelector(`input[name="${field}"]`).value = value;
+    document.addEventListener("DOMContentLoaded", function () {
+      const data = JSON.parse(localStorage.getItem("formData"));
+      if (!data) {
+        window.location.href = "index.html"; // データがなければ戻す
+        return;
+      }
+  
+      // 内容を画面に表示
+      document.getElementById("conf-name").textContent = data.name;
+      document.getElementById("conf-furigana").textContent = data.furigana;
+      document.getElementById("conf-mail").textContent = data.mail;
+      document.getElementById("conf-tel").textContent = data.tel;
+      document.getElementById("conf-comment").textContent = data.comment;
+  
+      // フォームに値をセット（Formspree送信用）
+      const form = document.querySelector("form.confirm");
+      form.querySelector("input[name='name']").value = data.name;
+      form.querySelector("input[name='furigana']").value = data.furigana;
+      form.querySelector("input[name='mail']").value = data.mail;
+      form.querySelector("input[name='tel']").value = data.tel;
+      form.querySelector("input[name='comment']").value = data.comment;
+      form.querySelector("input[name='privacy']").value = data.privacy;
+  
+      // 送信後にlocalStorageを削除（必要に応じて）
+      form.addEventListener("submit", function () {
+        localStorage.removeItem("formData");
+      });
     });
 </script>
 
