@@ -38,13 +38,13 @@
 <header class="header">
     <div class="header_inner">
         <div class="logo_content">
-            <a class="logo" href='#'>
+            <a class="logo" href='index.html'>
                 <img src="images/logo.svg" alt="ブルームシックヘッダーロゴ" loading="lazy">
             </a>
             <div class="header-menu">
                 <div class="header-link pc_only">
-                    <a class="header-contact" href="#">Contact</a>
-                    <a class="header-online" href="#">Online shop</a>
+                    <a class="header-contact" href="#contact">Contact</a>
+                    <a class="header-online" href="#online">Online shop</a>
                 </div>
                 <button class="toggle-menu">
                     <span class="toggle-line"></span>
@@ -62,25 +62,25 @@
                 <nav class="global_nav">
                     <ul>
                         <li>
-                            <a href="#">BloomChicについて</a>
+                            <a href="index.html#about">BloomChicについて</a>
                         </li>
                         <li>
-                            <a href="#">サービス</a>
+                            <a href="index.html#service">サービス</a>
                         </li>
                         <li>
-                            <a href="#">よくある質問</a>
+                            <a href="index.html#faq">よくある質問</a>
                         </li>
                         <li>
                             <a href="#">お知らせ</a>
                         </li>
                         <li>
-                            <a href="#">お取り扱い商品</a>
+                            <a href="index.html#items">お取り扱い商品</a>
                         </li>
                     </ul>
                 </nav>
                 <div class="header-content-link1">
-                    <a href="#" class="mail-btn">Contact</a>
-                    <a href="#" class="cart-btn">Online shop</a>
+                    <a href="index.html#contact" class="mail-btn">Contact</a>
+                    <a href="index.html#online" class="cart-btn">Online shop</a>
                 </div>
                 <div class="header-content-link2">
                     <div class="header-content-sns">
@@ -123,21 +123,21 @@
             <div class="news-content">
                 <ul class="news-list">
                     <li>
-                        <a class="news-item" href="">
+                        <a class="news-item" href="#">
                             <time class="news-time" datetime="2023-11-28">2023.11.28</time>
                             <p class="news-tag">お知らせ</p>
                             <p class="news-txt">年末年始休業のお知らせ</p>
                         </a>
                     </li>
                     <li>
-                        <a class="news-item" href="">
+                        <a class="news-item" href="#">
                             <time class="news-time" datetime="2023-12-04">2023.12.04</time>
                             <p class="news-tag">教室</p>
                             <p class="news-txt">2月のフラワーアレンジメント教室のスケジュールについて</p>
                         </a>
                     </li>
                     <li>
-                        <a class="news-item" href="">
+                        <a class="news-item" href="#">
                             <time class="news-time" datetime="2024-01-04">2024.01.04</time>
                             <p class="news-tag">教室</p>
                             <p class="news-txt">3月のフラワーアレンジメント教室のスケジュールについて</p>
@@ -393,7 +393,7 @@
     <div class="section-big-title">CONTACT</div>
     <div class="inner">
         <h2 class="section-title"><span>CONTACT</span>お問い合わせ</h2>
-        <form id="form" action="https://formspree.io/f/movdwlqp" method="POST">
+        <form id="contact-main" action="https://formspree.io/f/movdwlqp" method="POST">
             <ul class="contact-form">
                 <li class="contact-item">
                     <p class="contact-txt">お名前<span class="required">必須</span></p>
@@ -436,25 +436,25 @@
 
 <footer class="footer">
     <div class="footer-top-content">
-        <a href="" class="footer-logo">
+        <a href="index.html" class="footer-logo">
             <img src="images/logo-white.svg" alt="ブルームシックフッターロゴ" loading="lazy">
         </a>
         <nav class="footer-nav">
             <ul class="footer-list">
                 <li class="footer-item">
-                    <a href="#"> BloomChicについて</a>
+                    <a href="index.html#about"> BloomChicについて</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">サービス</a>
+                    <a href="index.html#service">サービス</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">よくある質問</a>
+                    <a href="index.html#faq">よくある質問</a>
                 </li>
                 <li class="footer-item">
                     <a href="#">お知らせ</a>
                 </li>
                 <li class="footer-item">
-                    <a href="#">お取り扱い商品</a>
+                    <a href="index.html#items">お取り扱い商品</a>
                 </li>
             </ul>
         </nav>
@@ -482,29 +482,19 @@
     <p class="footer-copyright">©️ 2024 BloomChic</p>
 </footer>
 <script>
-    document.getElementById("form").addEventListener("submit", function(e) {
-      e.preventDefault();
-    
-      const form = e.target;
-      const data = new FormData(form);
-    
-      fetch("https://formspree.io/f/movdwlqp", {
-        method: "POST",
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = "thanks.html";
-        } else {
-          alert("送信に失敗しました。もう一度お試しください。");
-        }
-      })
-      .catch(error => {
-        console.error("送信エラー:", error);
-        alert("エラーが発生しました。");
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelector("#contact-main").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const form = e.target;
+        localStorage.setItem("formData", JSON.stringify({
+          name: form.name.value,
+          furigana: form.furigana.value,
+          mail: form.mail.value,
+          tel: form.tel.value,
+          comment: form.comment.value,
+          privacy: form.privacy.checked ? "同意する" : "未同意"
+        }));
+        window.location.href = "confirm.html";
       });
     });
 </script>
