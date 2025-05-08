@@ -1146,11 +1146,13 @@ contact
 	resize: none;
 }
 .check {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	margin-top: 4.0rem;
-	gap: .6rem;
+}
+.check label {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	gap: 2.0rem;
 	position: relative;
 }
 .check input {
@@ -1177,7 +1179,7 @@ contact
 	text-align: center;
 	margin-top: 1.5rem;
 }
-.submit input {
+.submit button {
 	width: 24.0rem;
 	line-height: 2.5;
 	font-weight: 900;
@@ -1188,7 +1190,7 @@ contact
 	transition: .3s;
 }
 @media screen and (min-width: 681px) {
-	.submit input:hover {
+	.submit button:hover {
 		color: #E887A5;
 		background-color: #fff;
 	}
@@ -1247,8 +1249,8 @@ contact
 	}
 }
 
-/*============================
-お問い合わせ
+/* /*============================
+confirm・thanks
 ============================*/
 #contact-confirm,
 #contact-thanks {
@@ -1257,9 +1259,9 @@ contact
 }
 #contact-confirm .section-txt {
     text-align: center;
-    margin-top: 5.0rem;
+    margin: 5.0rem auto 0;
 }
-.contact-form {
+#confirm-box {
     background-color: #fff;
     border-radius: 5px;
 	margin: 5.0rem auto 0;
@@ -1268,7 +1270,7 @@ contact
 	flex-flow: column;
 	gap: 4.0rem;
 }
-.contact-item {
+#confirm-box p {
 	display: flex;
 	align-items: baseline;
     gap: 8.0rem;
@@ -1276,21 +1278,25 @@ contact
     padding: 0 2.0rem 1.0rem 3.0rem;
 	font-weight: 900;
 }
-.contact-txt {
+#confirm-box strong {
 	width: 13.0rem;
 	display: flex;
 	align-items: center;
     white-space: nowrap;
 }
-.required, 
-.check {
+#confirm-box .required, 
+#confirm-box .check {
     display: none;
 }
-.submit {
-	text-align: center;
+#contact-confirm .confirm-button-content {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	gap: 4.0rem;
 	margin-top: 5.0rem;
+	text-align: center;
 }
-.submit input {
+#contact-confirm .confirm-button-content .comp {
 	width: 24.0rem;
 	line-height: 2.5;
 	font-weight: 900;
@@ -1298,6 +1304,9 @@ contact
 	background-color: #E887A5;
 	border-radius: 100px;
 	border: 1px solid #E887A5;
+	transition: .3s;
+}
+#contact-confirm .confirm-button-content .return {
 	transition: .3s;
 }
 .thanks-txt-box {
@@ -1311,9 +1320,12 @@ contact
 }
 
 @media screen and (min-width: 681px) {
-    .submit input:hover {
+    #contact-confirm .confirm-button-content .comp:hover {
 		color: #E887A5;
 		background-color: #fff;
+	}
+	#contact-confirm .confirm-button-content .return:hover {
+		opacity: .7;
 	}
 }
 
@@ -1328,19 +1340,19 @@ contact
         font-size: 1.5rem;
         line-height: 2.13;
     }
-    .contact-form {
+    #confirm-box {
         margin-top: 3.8rem;
         padding: 2.2rem 1.0rem 3.0rem;
         gap: 2.0rem;
     }
-    .contact-item {
+    #confirm-box p {
         flex-flow: column;
         align-items: baseline;
         gap: 1.0rem;
         border-bottom: 1px solid #665C5C;
         padding: 0 .3rem 1.5rem .6rem;
     }
-    .submit {
+    #contact-confirm .confirm-button-content {
         margin-top: 3.0rem;
     }
 }
