@@ -481,6 +481,24 @@
     <p class="footer-copyright">©️ 2024 BloomChic</p>
 </footer>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+	document.querySelector("#contact-main").addEventListener("submit", function(e) {
+	e.preventDefault();
+	const form = e.target;
+	localStorage.setItem("formData", JSON.stringify({
+		name: form.name.value,
+		furigana: form.furigana.value,
+		mail: form.mail.value,
+		tel: form.tel.value,
+		comment: form.comment.value,
+		privacy: form.privacy.checked ? "同意する" : "未同意"
+	}));
+	window.location.href = "confirm.html";
+	});
+});
+</script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 
