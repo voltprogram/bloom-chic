@@ -1270,7 +1270,7 @@ confirm・thanks
 	flex-flow: column;
 	gap: 4.0rem;
 }
-#confirm-box p {
+.confirm-item {
 	display: flex;
 	align-items: baseline;
     gap: 8.0rem;
@@ -1278,7 +1278,7 @@ confirm・thanks
     padding: 0 2.0rem 1.0rem 3.0rem;
 	font-weight: 900;
 }
-#confirm-box strong {
+.confirm-label {
 	width: 13.0rem;
 	display: flex;
 	align-items: center;
