@@ -461,13 +461,13 @@
     </div>
     <div class="footer-bottom-content">
         <div class="footer-sns">
-            <a href="">
+            <a href="#">
                 <img src="images/ico-instagram-white.svg" alt="インスタグラムアイコン" loading="lazy">
             </a>
-            <a href="">
+            <a href="#">
                 <img src="images/ico-X-white.svg" alt="xアイコン" loading="lazy">
             </a>
-            <a href="">
+            <a href="#">
                 <img src="images/ico-facebook-white.svg" alt="フェイスブックアイコン" loading="lazy">
             </a>
         </div>
@@ -482,15 +482,32 @@
     <p class="footer-copyright">©️ 2024 BloomChic</p>
 </footer>
 <script>
-    document.querySelector("#form").addEventListener("submit", function(e) {
+    document.getElementById("form").addEventListener("submit", function(e) {
       e.preventDefault();
-      const formData = new FormData(this);
-      for (const [key, value] of formData.entries()) {
-        sessionStorage.setItem(key, value);
-      }
-      location.href = "confirm.html";
+    
+      const form = e.target;
+      const data = new FormData(form);
+    
+      fetch("https://formspree.io/f/movdwlqp", {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "thanks.html";
+        } else {
+          alert("送信に失敗しました。もう一度お試しください。");
+        }
+      })
+      .catch(error => {
+        console.error("送信エラー:", error);
+        alert("エラーが発生しました。");
+      });
     });
-  </script>
+</script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 
